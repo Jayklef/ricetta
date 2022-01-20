@@ -17,7 +17,7 @@ public class ClientServiceImpl implements ClientService{
     private ClientRepository clientRepository;
 
     @Override
-    public List<Client> getClientsList() {
+    public List<Client> findAllClients() {
         return clientRepository.findAll();
     }
 
@@ -27,7 +27,7 @@ public class ClientServiceImpl implements ClientService{
     }
 
     @Override
-    public Client getClientById(Long id) throws ClientNotFoundException {
+    public Client findClientById(Long id) throws ClientNotFoundException {
         Optional<Client> client = clientRepository.findById(id);
 
         if (id == null){
@@ -37,7 +37,7 @@ public class ClientServiceImpl implements ClientService{
     }
 
     @Override
-    public Client getClientByName(String name) throws ClientNotFoundException {
+    public Client findClientByName(String name) throws ClientNotFoundException {
         Client client = clientRepository.findClientByName(name);
 
         if (name == null || name.isEmpty() || name.isBlank()){

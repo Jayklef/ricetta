@@ -6,6 +6,8 @@ import com.jayklef.ricetta.service.ClientService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,31 +21,36 @@ public class ClientController {
     private final Logger LOGGER = LoggerFactory.getLogger(ClientController.class);
 
     @GetMapping("/clients")
-    public List<Client> getClientsList(){
+    public ResponseEntity<List<Client>> getClientsList(){
         LOGGER.info("Inside get getClientsList of ClientController");
-        return clientService.getClientsList();
+        List<Client> clientList = clientService.findAllClients();
+        return new ResponseEntity<>(clientList, HttpStatus.OK);
     }
 
     @PostMapping("/clients")
-    public Client saveClient(@RequestBody Client client){
+    public ResponseEntity<Client> saveClient(@RequestBody Client client){
         LOGGER.info("Inside get saveClient of ClientController");
-        return clientService.saveClient(client);
+        Client neClient = clientService.saveClient(client);
+        return new ResponseEntity<>(neClient, HttpStatus.CREATED);
     }
 
     @GetMapping("/clients/{id}/")
-    public Client getClientById(@PathVariable("id") Long id) throws ClientNotFoundException {
-        return clientService.getClientById(id);
+    public ResponseEntity<Client> getClientById(@PathVariable("id") Long id) throws ClientNotFoundException {
+       Client client = clientService.findClientById(id);
+        return new ResponseEntity<>(client, HttpStatus.OK);
     }
 
     @GetMapping("/clients/{name}")
-    public Client getClientByName(@PathVariable("name") String name) throws ClientNotFoundException {
-        return clientService.getClientByName(name);
+    public ResponseEntity<Client> getClientByName(@PathVariable("name") String name) throws ClientNotFoundException {
+       Client client = clientService.findClientByName(name);
+        return new ResponseEntity<>(client, HttpStatus.OK);
     }
 
     @PutMapping("/clients/{id}")
-    public Client updateClient(@PathVariable("id") Long id,
+    public ResponseEntity<Client> updateClient(@PathVariable("id") Long id,
                                @RequestBody Client client){
-        return clientService.updateClient(id, client);
+        Client updateClient = clientService.updateClient(id, client);
+        return new ResponseEntity<>(updateClient, HttpStatus.OK);
     }
 
     @DeleteMapping("/clients/{id}")

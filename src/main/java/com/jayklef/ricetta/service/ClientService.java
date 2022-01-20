@@ -7,15 +7,15 @@ import java.util.List;
 
 public interface ClientService {
 
-    List<Client> getClientsList();
+    List<Client> findAllClients();
 
     Client saveClient(Client client);
 
-    Client getClientById(Long id) throws ClientNotFoundException;
+    Client findClientById(Long id) throws ClientNotFoundException;
 
     Client updateClient(Long id, Client client);
 
-    Client getClientByName(String name) throws ClientNotFoundException;
+    Client findClientByName(String name) throws ClientNotFoundException;
 
     void deleteClientById(Long id);
 }
