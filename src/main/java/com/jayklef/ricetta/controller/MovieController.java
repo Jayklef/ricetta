@@ -8,6 +8,7 @@ import com.jayklef.ricetta.service.MovieService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,9 +24,10 @@ public class MovieController {
     private final Logger LOGGER = LoggerFactory.getLogger(MovieController.class);
 
     @GetMapping("/movies")
-    public List<Movie> getAllMovies(){
+    public ResponseEntity<List<Movie>> getAllMovies(){
         LOGGER.info("Inside getAllMovies of MovieController");
-        return movieService.getAllMovies();
+        List<Movie> movieList = movieService.findAllMovies();
+        return new ResponseEntity<>(movieList, HttpStatus.OK);
     }
 
     @PostMapping("/movies")

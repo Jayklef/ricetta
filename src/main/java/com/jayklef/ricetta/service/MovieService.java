@@ -8,7 +8,7 @@ import com.jayklef.ricetta.model.Movie;
 import java.util.List;
 
 public interface MovieService {
-    List<Movie> getAllMovies();
+    List<Movie> findAllMovies();
 
     Movie saveMovie(Movie movie);
 
