@@ -6,6 +6,8 @@ import com.jayklef.ricetta.service.GenreService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,24 +23,30 @@ public class GenreController {
     private Logger LOGGER = LoggerFactory.getLogger(GenreController.class);
 
     @GetMapping("/genres")
-    public List<Genre> getGenreList(){
+    public ResponseEntity<List<Genre>> getGenreList(){
         LOGGER.info("Inside getGenreList of GenreController");
-       return genreService.getGenreList();
+        List<Genre> genreList = genreService.findGenreList();
+       return new ResponseEntity<>(genreList, HttpStatus.OK);
     }
 
     @PostMapping("/genres")
-    public Genre saveGenre(@RequestBody Genre genre){
+    public ResponseEntity<Genre> saveGenre(@RequestBody Genre genre){
         LOGGER.info("Inside saveGenre of GenreController");
-        return genreService.saveGenre(genre);
+        Genre newGenre = genreService.saveGenre(genre);
+        return new ResponseEntity<>(newGenre, HttpStatus.CREATED);
     }
 
     @GetMapping("/genres/{id}")
-    public Genre getGenreById(@PathVariable("id") Long genreId) throws GenreNotFoundException {;
-        return genreService.getGenreById(genreId);
+    public ResponseEntity<Genre> getGenreById(@PathVariable("id") Long genreId) throws GenreNotFoundException {
+        LOGGER.info("Inside getGenreById of GenreController");
+        Genre genre = genreService.findByGenreId(genreId);
+        return new ResponseEntity<>(genre, HttpStatus.OK);
     }
 
     @GetMapping("/genres/{name}")
-    public Genre getGenreByName(@PathVariable("name") String name){
-        return genreService.getGenreByName(name);
+    public ResponseEntity<Genre> getByGenreName(@PathVariable("name") String name){
+        LOGGER.info("Inside getByGenreName of GenreController");
+        Genre genre = genreService.findByName(name);
+        return new ResponseEntity<>(genre, HttpStatus.OK);
     }
 }

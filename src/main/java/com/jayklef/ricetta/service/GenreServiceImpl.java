@@ -22,7 +22,7 @@ public class GenreServiceImpl implements GenreService{
     private MovieRepository movieRepository;
 
     @Override
-    public List<Genre> getGenreList() {
+    public List<Genre> findGenreList() {
         return genreRepository.findAll();
     }
 
@@ -32,7 +32,7 @@ public class GenreServiceImpl implements GenreService{
     }
 
     @Override
-    public Genre getGenreById(Long genreId) throws GenreNotFoundException {
+    public Genre findByGenreId(Long genreId) throws GenreNotFoundException {
         Optional<Genre> genre = genreRepository.findById(genreId);
 
         if (genreId == null){
@@ -42,8 +42,8 @@ public class GenreServiceImpl implements GenreService{
     }
 
     @Override
-    public Genre getGenreByName(String name) {
-        return genreRepository.findGenreByName(name);
+    public Genre findByName(String name) {
+        return genreRepository.findByName(name);
     }
 
 }

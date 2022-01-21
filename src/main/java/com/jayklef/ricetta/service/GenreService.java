@@ -7,11 +7,11 @@ import com.jayklef.ricetta.model.Movie;
 import java.util.List;
 
 public interface GenreService {
-    List<Genre> getGenreList();
+    List<Genre> findGenreList();
 
     Genre saveGenre(Genre genre);
 
-    Genre getGenreById(Long genreId) throws GenreNotFoundException;
+    Genre findByGenreId(Long genreId) throws GenreNotFoundException;
 
-    Genre getGenreByName(String name);
+    Genre findByName(String name);
 }
