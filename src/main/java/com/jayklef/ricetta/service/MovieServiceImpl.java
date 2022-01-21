@@ -71,7 +71,7 @@ public class MovieServiceImpl implements MovieService{
     }
 
     @Override
-    public String deleteMovieByMovieId(Long movieId) {
+    public String deleteByMovieId(Long movieId) {
          movieRepository.deleteById(movieId);
         return "Movie removed successfully";
     }

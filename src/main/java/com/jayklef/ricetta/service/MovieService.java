@@ -18,6 +18,6 @@ public interface MovieService {
 
     Movie findByTitle(String title) throws MovieNotFoundException;
 
-    String deleteMovieByMovieId(Long movieId);
+    String deleteByMovieId(Long movieId);
 
 }

@@ -37,24 +37,31 @@ public class MovieController {
     }
 
     @GetMapping("/movies/{movieid}")
-    public Movie getMovieByMovieId(@PathVariable ("movieid") Long movieId) throws ClientNotFoundException {
-        return movieService.getMovieByMovieId(movieId);
+    public ResponseEntity<Movie> getByMovieId(@PathVariable ("movieid") Long movieId) throws ClientNotFoundException {
+        LOGGER.info("Inside getByMovieId of MovieController");
+       Movie movie =  movieService.findByMovieId(movieId);
+        return new ResponseEntity<>(movie, HttpStatus.OK);
     }
 
     @PutMapping("/movies/{movieid}")
-    public Movie updateMovie(@PathVariable ("movieid") Long movieId,
+    public  ResponseEntity<Movie> updateMovie(@PathVariable ("movieid") Long movieId,
                              @RequestBody Movie movie){
-        return movieService.updateMovie(movieId, movie);
+        LOGGER.info("Inside getByMovieId of MovieController");
+        Movie updateMovie = movieService.updateMovie(movieId, movie);
+        return new ResponseEntity<>(updateMovie, HttpStatus.CREATED);
     }
 
     @GetMapping("/movies/{title}")
-    public Movie getMovieByTitle(@PathVariable ("title") String name) throws MovieNotFoundException {
-        return movieService.getMovieByTitle(name);
+    public ResponseEntity<Movie> getByTitle(@PathVariable ("title") String name) throws MovieNotFoundException {
+        LOGGER.info("Inside getByTitle of MovieController");
+        Movie movie = movieService.findByTitle(name);
+        return new ResponseEntity<>(movie, HttpStatus.OK);
     }
 
     @DeleteMapping("/movies/{movieid}")
-    public String deleteMovieByMovieId(@PathVariable("movieid") Long movieId){
-        movieService.deleteMovieByMovieId(movieId);
+    public String deleteByMovieId(@PathVariable("movieid") Long movieId){
+        LOGGER.info("Inside deleteByMovieId of MovieController");
+        movieService.deleteByMovieId(movieId);
         return "Movie deleted successfully";
     }
 }
