@@ -31,37 +31,29 @@ public class MovieController {
     }
 
     @PostMapping("/movies")
-    public ResponseEntity<Movie> saveMovie(@Valid @RequestBody Movie movie){
+    public Movie saveMovie(@Valid @RequestBody Movie movie){
         LOGGER.info("Inside sameMovie of MovieController");
-        Movie newMovie = movieService.saveMovie(movie);
-        return new ResponseEntity<>(newMovie, HttpStatus.CREATED);
+        return movieService.saveMovie(movie);
     }
 
     @GetMapping("/movies/{movieid}")
-    public ResponseEntity<Movie> getByMovieId(@PathVariable ("movieid") Long movieId) throws ClientNotFoundException {
-        LOGGER.info("Inside getByMovieId of MovieController");
-        Movie movie = movieService.findByMovieId(movieId);
-        return new ResponseEntity<>(movie, HttpStatus.OK);
+    public Movie getMovieByMovieId(@PathVariable ("movieid") Long movieId) throws ClientNotFoundException {
+        return movieService.getMovieByMovieId(movieId);
     }
 
     @PutMapping("/movies/{movieid}")
-    public ResponseEntity<Movie> updateMovie(@PathVariable ("movieid") Long movieId,
+    public Movie updateMovie(@PathVariable ("movieid") Long movieId,
                              @RequestBody Movie movie){
-        LOGGER.info("Inside sameMovie of MovieController");
-        Movie updateMovie = movieService.updateMovie(movieId, movie);
-        return new ResponseEntity<>(updateMovie, HttpStatus.CREATED);
+        return movieService.updateMovie(movieId, movie);
     }
 
     @GetMapping("/movies/{title}")
-    public ResponseEntity<Movie> getByTitle(@PathVariable ("title") String name) throws MovieNotFoundException {
-        LOGGER.info("Inside getByTitle of MovieController");
-        Movie movie = movieService.findByTitle(name);
-        return new ResponseEntity<>(movie, HttpStatus.OK);
+    public Movie getMovieByTitle(@PathVariable ("title") String name) throws MovieNotFoundException {
+        return movieService.getMovieByTitle(name);
     }
 
     @DeleteMapping("/movies/{movieid}")
     public String deleteMovieByMovieId(@PathVariable("movieid") Long movieId){
-        LOGGER.info("Inside deleteMovieByMovieId of MovieController");
         movieService.deleteMovieByMovieId(movieId);
         return "Movie deleted successfully";
     }
