@@ -12,7 +12,7 @@ public interface MovieService {
 
     Movie saveMovie(Movie movie);
 
-    Movie getMovieByMovieId(Long movieId) throws ClientNotFoundException;
+    Movie findByMovieId(Long movieId) throws ClientNotFoundException;
 
     Movie updateMovie(Long movieId, Movie movie);
 

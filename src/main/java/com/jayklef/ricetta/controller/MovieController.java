@@ -31,29 +31,36 @@ public class MovieController {
     }
 
     @PostMapping("/movies")
-    public Movie saveMovie(@Valid @RequestBody Movie movie){
+    public ResponseEntity<Movie> saveMovie(@Valid @RequestBody Movie movie){
         LOGGER.info("Inside sameMovie of MovieController");
-        return movieService.saveMovie(movie);
+        Movie newMovie = movieService.saveMovie(movie);
+        return new ResponseEntity<>(newMovie, HttpStatus.CREATED);
     }
 
     @GetMapping("/movies/{movieid}")
-    public Movie getMovieByMovieId(@PathVariable ("movieid") Long movieId) throws ClientNotFoundException {
-        return movieService.getMovieByMovieId(movieId);
+    public ResponseEntity<Movie> getByMovieId(@PathVariable ("movieid") Long movieId) throws ClientNotFoundException {
+        LOGGER.info("Inside getByMovieId of MovieController");
+        Movie movie = movieService.findByMovieId(movieId);
+        return new ResponseEntity<>(movie, HttpStatus.OK);
     }
 
     @PutMapping("/movies/{movieid}")
-    public Movie updateMovie(@PathVariable ("movieid") Long movieId,
+    public ResponseEntity<Movie> updateMovie(@PathVariable ("movieid") Long movieId,
                              @RequestBody Movie movie){
-        return movieService.updateMovie(movieId, movie);
+        LOGGER.info("Inside sameMovie of MovieController");
+        Movie updateMovie = movieService.updateMovie(movieId, movie);
+        return new ResponseEntity<>(updateMovie, HttpStatus.CREATED);
     }
 
     @GetMapping("/movies/{title}")
     public Movie getMovieByTitle(@PathVariable ("title") String name) throws MovieNotFoundException {
+        LOGGER.info("Inside sameMovie of MovieController");
         return movieService.getMovieByTitle(name);
     }
 
     @DeleteMapping("/movies/{movieid}")
     public String deleteMovieByMovieId(@PathVariable("movieid") Long movieId){
+        LOGGER.info("Inside sameMovie of MovieController");
         movieService.deleteMovieByMovieId(movieId);
         return "Movie deleted successfully";
     }

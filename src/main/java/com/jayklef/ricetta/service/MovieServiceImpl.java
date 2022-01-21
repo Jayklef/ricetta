@@ -29,7 +29,7 @@ public class MovieServiceImpl implements MovieService{
     }
 
     @Override
-    public Movie getMovieByMovieId(Long movieId) throws ClientNotFoundException {
+    public Movie findByMovieId(Long movieId) throws ClientNotFoundException {
         Optional<Movie> movie = movieRepository.findById(movieId);
 
         if (movieId == null){
