@@ -12,11 +12,11 @@ public interface MovieService {
 
     Movie saveMovie(Movie movie);
 
-    Movie getMovieByMovieId(Long movieId) throws ClientNotFoundException;
+    Movie findByMovieId(Long movieId) throws ClientNotFoundException;
 
     Movie updateMovie(Long movieId, Movie movie);
 
-    Movie getMovieByTitle(String title) throws MovieNotFoundException;
+    Movie findByTitle(String title) throws MovieNotFoundException;
 
     String deleteMovieByMovieId(Long movieId);
 

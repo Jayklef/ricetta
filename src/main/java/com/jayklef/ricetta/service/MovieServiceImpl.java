@@ -29,7 +29,7 @@ public class MovieServiceImpl implements MovieService{
     }
 
     @Override
-    public Movie getMovieByMovieId(Long movieId) throws ClientNotFoundException {
+    public Movie findByMovieId(Long movieId) throws ClientNotFoundException {
         Optional<Movie> movie = movieRepository.findById(movieId);
 
         if (movieId == null){
@@ -61,13 +61,13 @@ public class MovieServiceImpl implements MovieService{
     }
 
     @Override
-    public Movie getMovieByTitle(String title) throws MovieNotFoundException {
-        Movie movie = movieRepository.findMovieByTitle(title);
+    public Movie findByTitle(String title) throws MovieNotFoundException {
+        Movie movie = movieRepository.findByTitle(title);
 
         if (title.isBlank() || title.isEmpty()){
             throw new MovieNotFoundException("Movie does not  exist");
         }
-        return movieRepository.findMovieByTitle(title);
+        return movieRepository.findByTitle(title);
     }
 
     @Override
