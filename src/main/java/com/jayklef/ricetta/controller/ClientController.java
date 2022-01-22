@@ -36,25 +36,29 @@ public class ClientController {
 
     @GetMapping("/clients/{id}/")
     public ResponseEntity<Client> getClientById(@PathVariable("id") Long id) throws ClientNotFoundException {
-       Client client = clientService.findClientById(id);
+        LOGGER.info("Inside get getClientById of ClientController");
+        Client client = clientService.findClientById(id);
         return new ResponseEntity<>(client, HttpStatus.OK);
     }
 
     @GetMapping("/clients/{name}")
     public ResponseEntity<Client> getClientByName(@PathVariable("name") String name) throws ClientNotFoundException {
-       Client client = clientService.findClientByName(name);
+        LOGGER.info("Inside get getClientByName of ClientController");
+        Client client = clientService.findClientByName(name);
         return new ResponseEntity<>(client, HttpStatus.OK);
     }
 
     @PutMapping("/clients/{id}")
     public ResponseEntity<Client> updateClient(@PathVariable("id") Long id,
                                @RequestBody Client client){
+        LOGGER.info("Inside get updateClient of ClientController");
         Client updateClient = clientService.updateClient(id, client);
         return new ResponseEntity<>(updateClient, HttpStatus.OK);
     }
 
     @DeleteMapping("/clients/{id}")
     public String deleteClientById(@PathVariable("id") Long id){
+        LOGGER.info("Inside get deleteClientById of ClientController");
         clientService.deleteClientById(id);
         return "Client removed successfully";
     }
