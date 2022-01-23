@@ -2,13 +2,14 @@ package com.jayklef.ricetta.service;
 
 import com.jayklef.ricetta.exception.ClientNotFoundException;
 import com.jayklef.ricetta.exception.MovieNotFoundException;
-import com.jayklef.ricetta.model.Client;
+import com.jayklef.ricetta.model.Genre;
 import com.jayklef.ricetta.model.Movie;
 import com.jayklef.ricetta.repository.MovieRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -82,5 +83,23 @@ public class MovieServiceImpl implements MovieService{
         log.info("Inside deleteByMovieId of MovieServiceImpl Class");
          movieRepository.deleteById(movieId);
         return "Movie removed successfully";
+    }
+
+    @Override
+    public Movie saveMovieWithGenre() {
+        log.info("Inside saveMovieWithGenre of MovieServiceImpl Class");
+
+        Genre genre = Genre.builder()
+                .name(toString())
+                .build();
+
+        Movie neMovie = Movie.builder()
+                .title(toString())
+                .dateAdded(LocalDate.now())
+                .numberInStock(findAllMovies().stream().count())
+                .genre(genre)
+                .build();
+
+        return movieRepository.save(neMovie);
     }
 }

@@ -2,7 +2,6 @@ package com.jayklef.ricetta.service;
 
 import com.jayklef.ricetta.exception.ClientNotFoundException;
 import com.jayklef.ricetta.exception.MovieNotFoundException;
-import com.jayklef.ricetta.model.Client;
 import com.jayklef.ricetta.model.Movie;
 
 import java.util.List;
@@ -20,4 +19,5 @@ public interface MovieService {
 
     String deleteByMovieId(Long movieId);
 
+    Movie saveMovieWithGenre();
 }

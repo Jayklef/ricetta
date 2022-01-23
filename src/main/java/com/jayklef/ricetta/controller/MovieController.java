@@ -36,6 +36,13 @@ public class MovieController {
         return movieService.saveMovie(movie);
     }
 
+    @PostMapping("/newmovie")
+    public ResponseEntity<Movie> saveMovieWithGenre(){
+        LOGGER.info("Inside saveMovieWithGenre of MovieController");
+        Movie newMovie = movieService.saveMovieWithGenre();
+        return new ResponseEntity<>(newMovie, HttpStatus.CREATED);
+    }
+
     @GetMapping("/movies/{movieid}")
     public ResponseEntity<Movie> getByMovieId(@PathVariable ("movieid") Long movieId) throws ClientNotFoundException {
         LOGGER.info("Inside getByMovieId of MovieController");
