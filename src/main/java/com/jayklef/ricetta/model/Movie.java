@@ -34,4 +34,7 @@ public class Movie {
 
     @ManyToOne
     private Genre genre;
+
+    @ManyToOne
+    private Client client;
 }

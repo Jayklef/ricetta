@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -35,4 +36,14 @@ public class Client {
     private String email;
     private String address;
     private String phonenumber;
+
+    @OneToMany(
+            cascade = CascadeType.ALL
+    )
+
+    @JoinColumn(
+            name = "movieId",
+            referencedColumnName = "movie_id"
+    )
+    private List<Movie> movies;
 }

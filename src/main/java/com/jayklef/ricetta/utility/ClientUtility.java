@@ -1,5 +1,6 @@
 package com.jayklef.ricetta.utility;
 
+import com.jayklef.ricetta.model.Client;
 import com.jayklef.ricetta.service.ClientService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,5 +17,9 @@ public class ClientUtility {
         log.info("Inside calculateTotalClients of ClientUtility");
         Long totalClients = clientService.calculateTotalClients(numberOfClients);
         return new ResponseEntity<>(totalClients, HttpStatus.OK);
+    }
+
+    public ResponseEntity<Client> clientAndMoviesRented(){
+        return null;
     }
 }
