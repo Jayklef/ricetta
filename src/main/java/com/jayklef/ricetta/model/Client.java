@@ -42,8 +42,8 @@ public class Client {
     )
 
     @JoinColumn(
-            name = "movieId",
-            referencedColumnName = "movie_id"
+            name = "movie_Id",
+            referencedColumnName = "movieId"
     )
     private List<Movie> movies;
 }
