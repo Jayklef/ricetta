@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -35,6 +36,4 @@ public class Movie {
     @ManyToOne
     private Genre genre;
 
-    @ManyToOne
-    private Client client;
 }

@@ -37,13 +37,4 @@ public class Client {
     private String address;
     private String phonenumber;
 
-    @OneToMany(
-            cascade = CascadeType.ALL
-    )
-
-    @JoinColumn(
-            name = "movie_Id",
-            referencedColumnName = "movieId"
-    )
-    private List<Movie> movies;
 }
