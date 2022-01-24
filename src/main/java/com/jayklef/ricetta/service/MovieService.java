@@ -20,4 +20,6 @@ public interface MovieService {
     String deleteByMovieId(Long movieId);
 
     Movie saveMovieWithGenre();
+
+    Long calculateTotalMoviesInStock(Long numberInStock);
 }

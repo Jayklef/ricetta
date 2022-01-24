@@ -102,4 +102,12 @@ public class MovieServiceImpl implements MovieService{
 
         return movieRepository.save(neMovie);
     }
+
+    @Override
+    public Long calculateTotalMoviesInStock(Long numberInStock) {
+        List<Movie> movies = movieRepository.findAll();
+
+        return movies.stream()
+                     .count();
+    }
 }

@@ -51,4 +51,12 @@ public class GenreServiceImpl implements GenreService{
         return genreRepository.findByName(name);
     }
 
+    @Override
+    public Long calculateTotalNumberOfGenres(Long numberOfGenre) {
+        List<Genre> genres = genreRepository.findAll();
+
+        return genres.stream()
+                     .count();
+    }
+
 }

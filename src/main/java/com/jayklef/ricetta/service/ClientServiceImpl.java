@@ -89,4 +89,12 @@ public class ClientServiceImpl implements ClientService{
         log.info("Inside deleteClientById of ClientServiceImpl Class ");
         clientRepository.deleteById(id);
     }
+
+    @Override
+    public Long calculateTotalClients(Long numberOfClients) {
+        List<Client> clients = clientRepository.findAll();
+        
+        return clients.stream()
+                .count();
+    }
 }

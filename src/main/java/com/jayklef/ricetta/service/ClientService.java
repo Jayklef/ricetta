@@ -18,4 +18,6 @@ public interface ClientService {
     Client findClientByName(String name) throws ClientNotFoundException;
 
     void deleteClientById(Long id);
+
+    Long calculateTotalClients(Long numberOfClients);
 }

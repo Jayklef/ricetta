@@ -14,4 +14,6 @@ public interface GenreService {
     Genre findByGenreId(Long genreId) throws GenreNotFoundException;
 
     Genre findByName(String name);
+
+    Long calculateTotalNumberOfGenres(Long numberOfGenre);
 }
