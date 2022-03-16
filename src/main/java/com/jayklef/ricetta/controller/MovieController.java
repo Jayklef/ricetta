@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-
+mod
 @RestController
+@RequestMapping("api/v1/movies")
 public class MovieController {
 
     @Autowired
@@ -23,7 +24,7 @@ public class MovieController {
 
     private final Logger LOGGER = LoggerFactory.getLogger(MovieController.class);
 
-    @GetMapping("/movies")
+    @GetMapping("/list")
     public ResponseEntity<List<Movie>> getAllMovies(){
         LOGGER.info("Inside getAllMovies of MovieController");
         List<Movie> movieList = movieService.findAllMovies();
@@ -43,14 +44,14 @@ public class MovieController {
         return new ResponseEntity<>(newMovie, HttpStatus.CREATED);
     }
 
-    @GetMapping("/movies/{movieid}")
+    @GetMapping("/{movieid}")
     public ResponseEntity<Movie> getByMovieId(@PathVariable ("movieid") Long movieId) throws ClientNotFoundException {
         LOGGER.info("Inside getByMovieId of MovieController");
        Movie movie =  movieService.findByMovieId(movieId);
         return new ResponseEntity<>(movie, HttpStatus.OK);
     }
 
-    @PutMapping("/movies/{movieid}")
+    @PutMapping("/{movieid}")
     public  ResponseEntity<Movie> updateMovie(@PathVariable ("movieid") Long movieId,
                              @RequestBody Movie movie){
         LOGGER.info("Inside getByMovieId of MovieController");
@@ -58,14 +59,14 @@ public class MovieController {
         return new ResponseEntity<>(updateMovie, HttpStatus.CREATED);
     }
 
-    @GetMapping("/movies/{title}")
+    @GetMapping("/{title}")
     public ResponseEntity<Movie> getByTitle(@PathVariable ("title") String name) throws MovieNotFoundException {
         LOGGER.info("Inside getByTitle of MovieController");
         Movie movie = movieService.findByTitle(name);
         return new ResponseEntity<>(movie, HttpStatus.OK);
     }
 
-    @DeleteMapping("/movies/{movieid}")
+    @DeleteMapping("/{movieid}")
     public String deleteByMovieId(@PathVariable("movieid") Long movieId){
         LOGGER.info("Inside deleteByMovieId of MovieController");
         movieService.deleteByMovieId(movieId);
